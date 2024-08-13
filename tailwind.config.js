@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        wobble: {
+          "50%": {
+            "border-radius": "250px",
+          },
+        },
+      },
+    },
   },
   plugins: [],
 };
