@@ -5,6 +5,7 @@ import Row from "./components/common/Row";
 import HeroSection from "./components/Home/HeroSection";
 import Container from "./components/common/Container";
 import PopularProducts from "./components/Home/PopularProducts";
+import BestSellerProducts from "./components/Home/BestSellerProducts";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BottomHeader />
       <HeroSection />
       <PopularProducts />
+      <BestSellerProducts />
     </div>
   );
 }
