@@ -1,13 +1,12 @@
 import Button from "../common/Button";
 import Container from "../common/Container";
+import Layout from "../common/Layout";
+import QtyContainer from "../common/QtyContainer";
 import Row from "../common/Row";
-import Footer from "../Footer";
-import TopHeader from "../Header/TopHeader";
 
 function ProductDetails() {
   return (
-    <div className="w-full bg-[#1e28320d] h-[60px]">
-      <TopHeader />
+    <Layout>
       <Container className="my-[41px]">
         <Row className="justify-between">
           <Row className="w-[47%]">
@@ -52,13 +51,9 @@ function ProductDetails() {
                 vitae leo leo. Duis mollis lacinia nulla ut egestas. nunc.
               </p>
             </Row>
-            <Row className="mt-[40px] items-center">
-              <Button title="-" className="w-[52px] h-[52px]" />
-              <p className="w-[70px] text-center text-[16px] font-semibold">
-                0
-              </p>
-              <Button title="+" className="w-[52px] h-[52px]" />
-            </Row>
+            <div className="w-full mt-[40px]">
+              <QtyContainer />
+            </div>
             <Button
               title="Add to Cart"
               className="w-[174px] h-[52px] mt-[20px]"
@@ -66,8 +61,7 @@ function ProductDetails() {
           </Row>
         </Row>
       </Container>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 
