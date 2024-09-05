@@ -1,10 +1,33 @@
+import { useEffect, useState } from "react";
 import Button from "../common/Button";
 import Container from "../common/Container";
 import Layout from "../common/Layout";
 import QtyContainer from "../common/QtyContainer";
 import Row from "../common/Row";
+import client from "../../apis";
+import apiEndpoints from "../../apis/endpoint";
+import {
+  redirect,
+  redirectDocument,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 
 function ProductDetails() {
+  const [product, setProduct] = useState();
+  const { id } = useParams();
+
+  const getProduct = async () => {
+    try {
+      const response = await client.get(apiEndpoints.product(id));
+      setProduct(response.data);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  };
+  useEffect(() => {
+    getProduct();
+  }, []);
   return (
     <Layout>
       <Container className="my-[41px]">
@@ -12,44 +35,39 @@ function ProductDetails() {
           <Row className="w-[47%]">
             <img
               className="w-full object-cover h-[80vh]"
-              src="https://images.unsplash.com/photo-1714070700742-b59b045d2dd9?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Product"
+              src={product?.img}
+              alt={product?.title}
             />
           </Row>
           <Row className="flex-col w-[47%]">
             <h1 className="text-[30px] text-slate-700 font-semibold mb-[70px]">
-              Clothing | Demo Product
+              {`${product?.category.title} | ${product?.title}`}
             </h1>
             <Row className="gap-[20px] mb-[10px]">
               <p className="text-[18px] text-black font-medium w-[15%]">
                 Rating:
               </p>
-              <p className="text-[18px] text-black ">2/5</p>
+              <p className="text-[18px] text-black ">{product?.rating}</p>
             </Row>
             <Row className="gap-[20px]">
               <p className="text-[18px] text-black font-medium w-[15%]">
                 Price:
               </p>
-              <p className="text-[18px] text-black ">$20</p>
+              <p className="text-[18px] text-black ">{product?.price}</p>
             </Row>
             <Row className="gap-[20px]">
               <p className="text-[18px] text-black font-medium w-[15%]">
                 Category:
               </p>
-              <p className="text-[18px] text-black ">Clothing</p>
+              <p className="text-[18px] text-black ">
+                {product?.category.title}
+              </p>
             </Row>
             <Row className="gap-[20px] mt-[30px]">
               <p className="text-[18px] text-black font-medium w-[15%]">
                 Description:
               </p>
-              <p className="text-[18px] text-black ">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas tristique sagittis blandit. Quisque vitae tellus
-                maximus, porttitor orci et, dapibus odio. Phasellus laoreet eros
-                id metus pharetra, at ultricies lacus blandit. Curabitur sodales
-                nunc tortor, ac ultrices lorem hendrerit elementum. Suspendisse
-                vitae leo leo. Duis mollis lacinia nulla ut egestas. nunc.
-              </p>
+              <p className="text-[18px] text-black ">{product?.description}</p>
             </Row>
             <div className="w-full mt-[40px]">
               <QtyContainer />
