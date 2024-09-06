@@ -4,8 +4,11 @@ import RotatedSquare from "../../svgs/RotatedSquare";
 import HeaderButton from "./HeaderButton";
 import UserIcon from "../../svgs/UserIcon";
 import BucketIcon from "../../svgs/BucketIcon";
+import { CartContext } from "../../contextAPIs";
+import { useContext } from "react";
 
 function TopHeader() {
+  const { cartItems } = useContext(CartContext);
   return (
     <div className="w-full px-[10%] h-full">
       <Row className="flex items-center h-full justify-between">
@@ -17,7 +20,11 @@ function TopHeader() {
         </Row>
         <Row>
           <HeaderButton title="Account" Icon={UserIcon} />
-          <HeaderButton title="Cart" Icon={BucketIcon} url="/cart" />
+          <HeaderButton
+            title={`Cart (${cartItems.length})`}
+            Icon={BucketIcon}
+            url="/cart"
+          />
         </Row>
       </Row>
     </div>

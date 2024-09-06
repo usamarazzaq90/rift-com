@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../common/Button";
 import Container from "../common/Container";
 import Layout from "../common/Layout";
@@ -12,8 +12,10 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import { CartContext } from "../../contextAPIs";
 
 function ProductDetails() {
+  const { handleInc } = useContext(CartContext);
   const [product, setProduct] = useState();
   const { id } = useParams();
 
@@ -70,9 +72,10 @@ function ProductDetails() {
               <p className="text-[18px] text-black ">{product?.description}</p>
             </Row>
             <div className="w-full mt-[40px]">
-              <QtyContainer />
+              <QtyContainer data={product} />
             </div>
             <Button
+              onClick={() => handleInc(product)}
               title="Add to Cart"
               className="w-[174px] h-[52px] mt-[20px]"
             />
